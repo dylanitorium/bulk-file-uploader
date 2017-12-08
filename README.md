@@ -2,6 +2,10 @@
 
 Uploads a directory (non-recusive) to an S3 bucket.
 
+## requirements
+
+AWS credentials with write permissions for S3 available to the sdk (i.e. config file, environment varialbles)
+
 ## installation 
 
 `$ npm install -g bulk-file-uploader`

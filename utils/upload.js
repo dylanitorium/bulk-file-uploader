@@ -37,7 +37,7 @@ const getFileName = path => path.split('/').pop();
  */
 const upload = async ({ path, bucket, reupload }) => (
   new Promise(async (resolve, reject) => {
-    const key = getFileName(path);
+    const key = `${getFileName(path)}/${getFileName(path)}`;
     const s3ObjectExists = await checkFile({ key, bucket });
     
     if (s3ObjectExists && !reupload) {
@@ -52,7 +52,7 @@ const upload = async ({ path, bucket, reupload }) => (
     const handleStreamError = error => reject(error);
     
     // This is declared in the scope of the promise just for consistency
-    const handleUploadProgress = data => log(`${filkeyeName}: ${data.loaded} bytes uploaded...`);
+    const handleUploadProgress = data => log(`${key}: ${data.loaded} bytes uploaded...`);
     
     // This will take a read stream and put out a write stream - a stream like this called
     // a duplex stream
@@ -70,6 +70,7 @@ const upload = async ({ path, bucket, reupload }) => (
     
     // Create an upload object
     const upload = s3.upload({
+      ACL: 'public-read',
       Bucket: bucket,
       Key: key,
       Body: duplexStream

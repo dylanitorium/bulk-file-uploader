@@ -7,7 +7,7 @@ const CONFIG_FILE = path.resolve(os.homedir(), '.bfurc');
 
 const DEFAULT_CONFIG =  {
   bucket: 'none',
-  // dynamoDbTable: 'none',
+  dynamoDbTable: 'none',
 };
 
 const configurationFileExists = async () => {
@@ -54,9 +54,9 @@ const getUserConfig = async (config) => {
         bucket: {
           message: `S3 Bucket [${config.bucket}]`,
         },
-        // dynamoDbTable: {
-        //   message: `DynamoDB Table [${config.dynamoDbTable}]`,
-        // },
+        dynamoDbTable: {
+          message: `DynamoDB Table [${config.dynamoDbTable}]`,
+        },
       }
     }, (error, result) => {
       if (error) {

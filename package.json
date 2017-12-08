@@ -8,6 +8,7 @@
     "aws-sdk": "^2.166.0",
     "commander": "^2.12.2",
     "debug": "^3.1.0",
+    "json-2-csv": "^2.1.2",
     "pledgerize": "^1.0.0",
     "prompt": "^1.0.0"
   }

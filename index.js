@@ -19,6 +19,10 @@ commander
   .description('Configure bfu\'s AWS settings')
   .action(processes.config.configure);
   
+commander
+  .command('export [output]')
+  .action(processes.exportLinks)
+  
 commander.parse(process.argv);
 
 // const dir = commander.args[0];
