@@ -20,7 +20,8 @@ commander
   .action(processes.config.configure);
   
 commander
-  .command('export [output]')
+  .command('export [file]')
+  .description('Output a corresponding metadata table to csv')
   .action(processes.exportLinks)
   
 commander.parse(process.argv);

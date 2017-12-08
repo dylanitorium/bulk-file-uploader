@@ -75,12 +75,11 @@ const filterUserConfig = (config) => {
     if (config.hasOwnProperty(key)) {
       if (config[key] && config[key] !== '') {
         filtered[key] = config[key];
-      }
+      }bfu 
     }
   }
   return filtered;
 }
-
 
 /**
  * Configure the application

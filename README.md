@@ -25,6 +25,7 @@ Options:
 
 Commands:
 
-  upload [dir]  Upload a directory
-  config        Configure bfu's AWS settings
+  upload [dir]   Upload a directory
+  config         Configure bfu's AWS settings
+  export [file]  Output a corresponding metadata table to csv
 ```
