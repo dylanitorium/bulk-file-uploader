@@ -1,6 +1,7 @@
 {
   "version": "1.0.2",
   "name": "bulk-file-uploader",
+  "main": "index.js",
   "bin": {
     "bfu": "index.js"
   },
