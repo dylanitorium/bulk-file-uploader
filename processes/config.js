@@ -69,6 +69,19 @@ const getUserConfig = async (config) => {
 }
 
 
+const filterUserConfig = (config) => {
+  const filtered = {};
+  for (let key in config) {
+    if (config.hasOwnProperty(key)) {
+      if (config[key] && config[key] !== '') {
+        filtered[key] = config[key];
+      }
+    }
+  }
+  return filtered;
+}
+
+
 /**
  * Configure the application
  */
@@ -78,7 +91,7 @@ const configure = async () => {
     const userConfig = await getUserConfig(config);
     const updatedConfig = {
       ...config,
-      ...userConfig
+      ...filterUserConfig(userConfig)
     };
       
     fs.writeFile(CONFIG_FILE, JSON.stringify(updatedConfig, null, 2), (error) => {
