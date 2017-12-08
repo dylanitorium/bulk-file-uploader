@@ -12,11 +12,12 @@ AWS.config.update({
 const dynamodb = new AWS.DynamoDB();
 
 
-const getRecords = async () => {
+const getRecords = async (startKey) => {
   return new Promise(async (resolve, reject) => {
     const { dynamoDbTable } = await loadConfiguration();
     const params = {
       TableName: dynamoDbTable,
+      ExclusiveStartKey: startKey,
     };
     
     dynamodb.scan(params, (error, data) => {
@@ -43,18 +44,30 @@ const convertToCSV = async (data) => {
 
 const exportLinks = async (output) => {
   return new Promise(async (resolve, reject) => {
-    let records;
+    let records = [];
     let csv = '';
     
     try {
-      records = await getRecords();
+      result = await getRecords();
+      records = [
+        ...records,
+        ...result.Items,
+      ];
+      
+      while(result.LastEvaluatedKey) {
+        result = await getRecords(result.LastEvaluatedKey);
+        records = [
+          ...records,
+          ...result.Items,
+        ];
+      }
     } catch (e) {
       log('Error getting records');
       return reject(e);
-    }
+    }     
     
     try {
-      csv = await convertToCSV(records.Items);
+      csv = await convertToCSV(records);
     } catch (e) {
       log('Error writing csv');
       return reject(e);
