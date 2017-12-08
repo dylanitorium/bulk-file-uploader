@@ -10,15 +10,14 @@ AWS.config.update({
 
 const s3 = new AWS.S3();
 
-
-const checkFile = async (key, bucket) => {
+const checkFile = async ({ key, bucket }) => {
   return new Promise(async (resolve, reject) => {
     s3.headObject({
       Key: key,
       Bucket: bucket
     }, (error) =>  {  
       if (error && error.code === 'NotFound') {  
-        resolve(false);
+        return resolve(false);
       }
       
       return resolve(true);
